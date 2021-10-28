@@ -1,7 +1,7 @@
 '''
-Single Linkedlist Class 
-functions: 
-    insert_list: insert at the head.
+Single Linkedlist Implementation 
+Functions: 
+    insert_list_at_end: insert at the head.
     display_list: displays the linkedlist.
     search_list: Search an element. 
     remove_element: remove an element at a position.
@@ -18,7 +18,7 @@ class SingleLinkedList:
     def __init__(self):
         self.head = None #head is pointer to the head node.
 
-    def insert_list(self, new_node):
+    def insert_list_at_end(self, new_node):
         if self.head:
             last_node = self.head #last_node stores the value of head and next nodes.
             while last_node.next != None:
@@ -27,6 +27,10 @@ class SingleLinkedList:
             last_node.next = new_node
         else:
             self.head = new_node
+
+    def insert_list_at_head(self, new_node):
+        new_node.next = self.head
+        self.head = new_node
 
     def display_list(self):
         disp_node = self.head
@@ -89,17 +93,26 @@ class SingleLinkedList:
 if __name__ == '__main__':
     s_linkedlist = SingleLinkedList() 
    
-    
+    print("Inserting 100 random elements at the head - O(1)")
     #inserting 100 random elements in the linkedlist
     for i in range(0, 100):
-        s_linkedlist.insert_list(Node(random.randint(0,10)))
+        s_linkedlist.insert_list_at_head(Node(random.randint(0,10)))
    
     #displaying linkedlist
     s_linkedlist.display_list();
+   
+    print("\nInserting element - 10 at the end of the list - O(n)")
+    #Inserting at the end of linkedlist
+    s_linkedlist.insert_list_at_end(Node(10))
     
+    #displaying linkedlist
+    s_linkedlist.display_list();
+
+    print("\nSearching for element - 8 in the list - O(n)")
     #searching for element - 8 in linkedlist
     s_linkedlist.search_list(8);
 
+    print("\nRemoving element - 8 from the list - O(n)")
     #removing element - 8 from linkedlist
     s_linkedlist.remove_element(8);
 
