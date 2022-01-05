@@ -4,6 +4,8 @@
 #include <bits/stdc++.h>
 #include <time.h>
 
+#define graph_size 10
+
 using namespace std;
 
 class node{
@@ -49,16 +51,25 @@ class graph{
 			//adding u to the adjacency list of v
 			node* temp = new node();
 			temp -> data = u; 
-			node* iter = *(adjlist + v); 
+			node* iter = (*(adjlist + v));
+		       		
 			while(iter -> next != NULL){
+				if (iter -> data == u){
+					cout << "Edge: {" << v <<  "," << u << "} exists" << endl;
+					return;
+				}
 				iter = iter -> next;
+			}
+			if (iter -> data == u){
+				cout << "Edge: {" << v <<  "," << u << "} exists" << endl;
+				return;
 			}
 			iter -> next = temp; 
 
 			//adding v to the adjacency list of u
 			node* temp2 = new node();
 			temp2 -> data = v; 
-			iter = *(adjlist + u); 
+			iter = (*(adjlist + u)); 
 			while(iter -> next != NULL){
 				iter = iter -> next;
 			}
@@ -70,6 +81,10 @@ class graph{
 			delete adjlist;
 		}
 
+		int size(){
+			return num_vertices;
+		}
+
 
 };
 			
@@ -77,11 +92,20 @@ class graph{
 
 int main(){
 
-	graph obj(5); 
-	obj.print_graph(); 
+	srand(time(0));
 
-	obj.addEdge(1,2);
-	obj.addEdge(1,4);
-	obj.addEdge(1,3);
-	obj.print_graph(); 
+	graph obj(graph_size);
+	cout << "Size of Graph: " << obj.size() << endl; 	
+	
+
+	cout << "Adding 40 edges randomly" << endl;
+	for(int i = 0; i < 40; i++){
+		int k = rand() % graph_size; 
+		int z = rand() % graph_size; 
+		cout << "{" << k << "," << z << "}" << " ";
+		obj.addEdge(k, z);
+	}
+	cout << endl;
+	obj.addEdge(3,3);
+	obj.print_graph();
 };
