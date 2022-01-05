@@ -106,6 +106,6 @@ int main(){
 		obj.addEdge(k, z);
 	}
 	cout << endl;
-	obj.addEdge(3,3);
+	obj.addEdge(3,3); // Duplicate edge check
 	obj.print_graph();
 };
