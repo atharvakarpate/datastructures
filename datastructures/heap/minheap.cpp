@@ -107,7 +107,7 @@ int main(){
 	minHeap obj; 
 
 	cout << "Adding 20 random elements to heap" << endl;
-	for(int i = 0; i < 10; i++){
+	for(int i = 0; i < 20; i++){
 		int k = rand() % 100; 
 		obj.insert(k);
 		cout << k << " ";
