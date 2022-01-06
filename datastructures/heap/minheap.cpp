@@ -64,18 +64,29 @@ class minHeap{
 	}
 
 	void heapifyDown(int index){
-		if(hasLeftChild(index)){
+		if(hasLeftChild(index) && hasRightChild(index)){
 			int lcindex = getLeftChildIndex(index); 
+			int rcindex = getRightChildIndex(index);
+
+			int smallestIndex;
+		
+			if (mheap[rcindex] < mheap[lcindex]){
+				smallestIndex = rcindex;
+			}
+			else{
+				smallestIndex = lcindex;
+			}
+			
+			if(mheap[smallestIndex] < mheap[index]){
+				swapValues(smallestIndex, index); 
+				heapifyDown(smallestIndex);
+			}
+		}
+		else if(hasLeftChild(index)){
+			int lcindex = getRightChildIndex(index); 
 			if(mheap[lcindex] < mheap[index]){
 				swapValues(lcindex, index); 
 				heapifyDown(lcindex);
-			}
-			else if(hasRightChild(index)){
-				int rcindex = getRightChildIndex(index); 
-				if(mheap[rcindex] < mheap[index]){
-					swapValues(rcindex, index); 
-					heapifyDown(rcindex);
-				}
 			}
 		}
 	}
@@ -96,7 +107,7 @@ int main(){
 	minHeap obj; 
 
 	cout << "Adding 20 random elements to heap" << endl;
-	for(int i = 0; i < 20; i++){
+	for(int i = 0; i < 10; i++){
 		int k = rand() % 100; 
 		obj.insert(k);
 		cout << k << " ";
@@ -108,7 +119,7 @@ int main(){
 	cout << "Popping " << z << " elements" << endl;
 	for(int i = 0; i < z; i++){
 		obj.pop();
+		obj.printHeap();
 	}
 
-	obj.printHeap();
 };
